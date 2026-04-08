@@ -8,7 +8,11 @@ using namespace std;
 //     many types of data (int, char, string, etc.)
 //  Replace the ... with proper parameters
 template <typename flexibleType> // ???
-void printArray(...) {}
+void printArray(flexibleType array[], int size) {
+    for(int i = 0; i < size; i++){
+        cout << array[i] << " ";
+    }
+}
 
 // Implement a sequential search algorithm
 // your function should search for a target value (target)
@@ -16,6 +20,11 @@ void printArray(...) {}
 // return true if target exists in the array within this range,
 //    return false otherwise
 bool seqSearch(string target, string arr[], int start, int end) {
+    for(int i = start; i <= end; i++){
+        if(target == arr[i]){
+            return true;
+        }
+    }
     return false;
 }
 
@@ -23,6 +32,17 @@ bool seqSearch(string target, string arr[], int start, int end) {
 // Return true if target exists in the array with size n,
 //    return false otherwise 
 bool binSearch(float target, float arr[], int n) {
+    for(int i = n/2; i < n; i++){
+        if(arr[i] == target){
+            return true;
+        }
+        if(arr[i] > target){
+            //
+        }
+        if(arr[i] < target){
+            //
+        }
+    }
     return false;	
 }
 
