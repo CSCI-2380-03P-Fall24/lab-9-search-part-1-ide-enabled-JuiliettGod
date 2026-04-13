@@ -32,18 +32,20 @@ bool seqSearch(string target, string arr[], int start, int end) {
 // Return true if target exists in the array with size n,
 //    return false otherwise 
 bool binSearch(float target, float arr[], int n) {
-    for(int i = n/2; i < n; i++){
-        if(arr[i] == target){
+    int left = 0;
+    int right = n - 1;
+    
+    while(left <= right){
+        int mid = left + (right-left)/2;
+        if(arr[mid] == target){
             return true;
-        }
-        if(arr[i] > target){
-            //
-        }
-        if(arr[i] < target){
-            //
+        } else if(arr[mid] > target){
+            right = mid - 1;
+        } else{
+            left = mid + 1;
         }
     }
-    return false;	
+    return false;
 }
 
 // Implement a recursive binary search 
@@ -51,10 +53,20 @@ bool binSearch(float target, float arr[], int n) {
 //   return false otherwise
 bool binSearchR(char target, char charray[], int n) {
     // base case
+    if(n <= 0){
+        return false;
+    }
+    int mid = n / 2;
+    if(charray[mid] == target){
+        return true;
+    }
 
     //general case
-
-    return false;
+    if(charray[mid] < target){
+        return binSearchR(target, charray + mid + 1, n - mid - 1);
+    } else{
+        return binSearchR(target, charray, mid);
+    }
 }
 
 // Implement Exponential Search
@@ -70,5 +82,23 @@ bool binSearchR(char target, char charray[], int n) {
 //         You may pass a pointer to the start of the window and its length,
 //         or copy that window to a temporary buffer if you prefer.
 bool expSearch(float target, float arr[], int n) {
-    return false;
+    if(n <= 0){
+        return false;
+    }
+    if(arr[0] == target || arr[n - 1] == target){
+        return true;
+    }
+    int bound = 1;
+    while(bound < n && arr[bound] < target){
+        bound = bound * 2;
+    }
+    int left = bound / 2;
+    int right;
+    if(bound < n){
+        right = bound;
+    } else{
+        right = n - 1;
+    }
+
+    return binSearch(target, arr + left, right - left + 1);
 }
